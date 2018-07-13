@@ -194,7 +194,7 @@ Module.register("MMM-OnScreenMenu", {
 
         console.log(`OSM Menu Item Clicked: ${actionName}\n${JSON.stringify(actionDetail)}`);
 
-        var nodeActions = ["monitorOn", "monitorOff", "monitorToggle", "restart", "reboot", "shutdown", "stop", "minimize", "toggleFullscreen", "openDevTools"];
+        var nodeActions = ["monitorOn", "monitorOff", "monitorToggle", "restart", "reboot", "shutdown", "stop", "minimize", "toggleFullscreen", "openDevTools", "loadPage"];
 
         // Module Actions
         if (actionName.startsWith("module")) {
@@ -206,6 +206,8 @@ Module.register("MMM-OnScreenMenu", {
             this.sendSocketNotification("PROCESS_ACTION", actionName);
         } else if (actionName === "refresh") {
             window.location.reload(true);
+        } else if (actionName === "loadPage") {
+            window.location.assign(actionDetail.page);
         } else if (actionName === "toggleTouchMode") {
             this.toggleTouchMode();
         } else if (actionName.startsWith("changeMenuPosition_")) {
